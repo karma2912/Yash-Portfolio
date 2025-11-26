@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import TechMarquee from "@/components/TechMarquee";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SimpleProjectCard = ({
   title,
@@ -52,6 +53,7 @@ const SimpleProjectCard = ({
 );
 
 export default function Home() {
+  const router = useRouter();
   return (
     <main className="relative bg-white min-h-screen text-neutral-900 selection:bg-neutral-900 selection:text-white">
       <Navbar />
@@ -82,7 +84,7 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="px-8 py-3 rounded-full bg-neutral-900 text-white font-medium hover:bg-neutral-800 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-neutral-900/20">
+            <button className="px-8 py-3 rounded-full bg-neutral-900 text-white font-medium hover:bg-neutral-800 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-neutral-900/20" onClick={()=>router.push("/work")}>
               View Projects
             </button>
             <button className="px-8 py-3 rounded-full bg-white text-neutral-900 border border-neutral-200 font-medium hover:bg-neutral-50 transition-all">
@@ -184,7 +186,7 @@ export default function Home() {
             Selected Works
           </h2>
           <span className="text-neutral-400 text-sm font-mono">
-            (2023 - 2024)
+            (2024 - 2025)
           </span>
         </div>
 
