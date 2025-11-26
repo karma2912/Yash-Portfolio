@@ -4,12 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Github, Filter } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
-// --- DUMMY DATA ---
 const projects = [
   {
     id: 1,
     title: "Anya Meds Platform",
-    category: "Web Development",
+    category: "College",
     description: "A comprehensive healthcare dashboard allowing doctors to manage patient records in real-time. Features compliant data storage and telemedicine integration.",
     stack: ["Next.js", "Supabase", "Stripe", "WebRTC"],
     year: "2024",
@@ -19,8 +18,19 @@ const projects = [
   },
   {
     id: 2,
-    title: "Lumina Finance",
-    category: "Mobile App",
+    title: "YMetaverse",
+    category: "Personal",
+    description: "A comprehensive healthcare dashboard allowing doctors to manage patient records in real-time. Features compliant data storage and telemedicine integration.",
+    stack: ["Next.js", "Supabase", "Stripe", "WebRTC"],
+    year: "2024",
+    link: "#",
+    github: "#",
+    color: "bg-violet-100" 
+  },
+  {
+    id: 3,
+    title: "Fabric By Meter",
+    category: "Freelanced",
     description: "A personal finance tracker built for iOS and Android. detailed analytics, budget forecasting, and bank synchronization using Plaid.",
     stack: ["React Native", "TypeScript", "Node.js"],
     year: "2024",
@@ -29,42 +39,53 @@ const projects = [
     color: "bg-blue-100"
   },
   {
-    id: 3,
-    title: "Vex UI Kit",
-    category: "Design System",
+    id: 4,
+    title: "Pavitra Atut Rishta",
+    category: "Freelanced",
     description: "An open-source component library focused on accessibility and dark-mode optimization. Used by over 200+ developers.",
     stack: ["Framer Motion", "Tailwind", "Storybook"],
+    year: "2023",
+    link: "#",
+    github: "#",
+    color: "bg-rose-100"
+  },
+  {
+    id: 5,
+    title: "Phising Guardian",
+    category: "Hackathon",
+    description: "Real estate CRM for agencies. Automates lead generation, email marketing, and property listing management.",
+    stack: ["Vue.js", "Laravel", "MySQL"],
     year: "2023",
     link: "#",
     github: "#",
     color: "bg-violet-100"
   },
   {
-    id: 4,
-    title: "Estate Flow",
-    category: "Web Development",
-    description: "Real estate CRM for agencies. Automates lead generation, email marketing, and property listing management.",
-    stack: ["Vue.js", "Laravel", "MySQL"],
-    year: "2023",
-    link: "#",
-    github: "#",
-    color: "bg-orange-100"
-  },
-  {
-    id: 5,
-    title: "Zenith E-Commerce",
-    category: "Web Development",
+    id: 6,
+    title: "Quiz Quest",
+    category: "College",
     description: "High-performance headless e-commerce storefront with internationalization support and AI-driven product recommendations.",
     stack: ["Next.js", "Shopify API", "Redis"],
     year: "2022",
     link: "#",
     github: "#",
-    color: "bg-rose-100"
+    color: "bg-orange-100"
   },
   {
-    id: 6,
-    title: "TaskMaster AI",
+    id: 7,
+    title: "Khan Cranes",
     category: "SaaS",
+    description: "Productivity tool that uses LLMs to automatically prioritize and categorize user tasks based on urgency and context.",
+    stack: ["Python", "FastAPI", "OpenAI", "React"],
+    year: "2022",
+    link: "#",
+    github: "#",
+    color: "bg-blue-100"
+  },
+  {
+    id: 8,
+    title: "YCall",
+    category: "Personal",
     description: "Productivity tool that uses LLMs to automatically prioritize and categorize user tasks based on urgency and context.",
     stack: ["Python", "FastAPI", "OpenAI", "React"],
     year: "2022",
@@ -74,7 +95,7 @@ const projects = [
   },
 ];
 
-const categories = ["All", "Web Development", "Mobile App", "Design System", "SaaS"];
+const categories = ["All", "Freelanced", "Hackathon", "Personal", "College"];
 
 export default function Work() {
   const [filter, setFilter] = useState("All");

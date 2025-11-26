@@ -190,10 +190,10 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <SimpleProjectCard
-            title="Matrimonial App"
+            title="Service Site"
             category="Website"
-            link="https://atut-pavitra-rishta.vercel.app/"
-            logo="/pavitraatutrishtaLogo.jpg" 
+            link="https://khancrane.netlify.app/"
+            logo="/khanCraneLogo.webp" 
   accentColor="bg-grey-50"
           />
           <SimpleProjectCard
