@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const projects = [
   {
@@ -124,7 +125,7 @@ const categories = ["All", "Freelanced", "Hackathon", "Personal", "College"];
 
 export default function Work() {
   const [filter, setFilter] = useState("All");
-
+  const router = useRouter();
   const filteredProjects = projects.filter(
     (project) => filter === "All" || project.category === filter
   );
@@ -261,7 +262,7 @@ export default function Work() {
             I am currently open to new opportunities and freelance work. Let's
             discuss how we can build something great together.
           </p>
-          <button className="px-8 py-4 rounded-full bg-neutral-900 text-white font-bold hover:bg-neutral-800 transition-all hover:scale-105">
+          <button className="px-8 py-4 rounded-full bg-neutral-900 text-white font-bold hover:bg-neutral-800 transition-all hover:scale-105" onClick={()=>router.push("/contact")}>
             Start a Conversation
           </button>
         </div>

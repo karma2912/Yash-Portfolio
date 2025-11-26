@@ -2,7 +2,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { 
-  Code2, Database, Globe, Layout, Cpu, Smartphone, Cloud, Terminal 
+  Code2, Database, Globe, Layout, Cpu, Smartphone, Cloud, Terminal, 
+  LightbulbIcon,
+  Bolt,
+  Edit2Icon,
+  Network,
+  HardDrive
 } from "lucide-react";
 
 const techStack = [
@@ -11,8 +16,10 @@ const techStack = [
   { name: "TypeScript", icon: Terminal },
   { name: "Tailwind", icon: Layout },
   { name: "Node.js", icon: Cpu },
-  { name: "Supabase", icon: Database },
-  { name: "Prisma", icon: Database },
+  { name: "MongoDb", icon: Database },
+  { name: "Socket.io", icon: Bolt},
+  { name: "AWS", icon: HardDrive},
+  { name: "Kubernetes", icon: Network},
   { name: "Framer Motion", icon: Smartphone },
 ];
 
