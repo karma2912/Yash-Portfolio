@@ -1,23 +1,59 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, FormEvent, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, MapPin, Copy, Check, ArrowRight, Github, Linkedin, Twitter } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText("hello@example.com");
+    navigator.clipboard.writeText("rajakyash23@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true); 
+
+    const formData = new FormData(event.currentTarget as HTMLFormElement);
+    formData.append("access_key", "70aef623-8b37-4dbf-8ccf-b508057e5c31");
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      }).then((res) => res.json());
+
+      if (res.success) {
+        console.log("Success", res);
+        setIsSent(true); 
+        // Use the ref to reset the form
+        formRef.current?.reset(); 
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsSubmitting(false); 
+    }
   };
 
   return (
     <main className="relative bg-white min-h-screen text-neutral-900 selection:bg-neutral-900 selection:text-white">
       <Navbar />
 
-      <div className="fixed inset-0 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size:[16px_16px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+      <div className="fixed inset-0 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
 
       <section className="pt-40 pb-20 px-4 md:px-12 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
@@ -36,7 +72,7 @@ export default function Contact() {
                   <span className="text-xs font-bold uppercase tracking-wider">Open to Work</span>
                </div>
                <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-neutral-900 mb-6">
-                 Let's start a <br /> project together.
+                 Let&apos;s start a <br /> project together.
                </h1>
                <p className="text-xl text-neutral-500 leading-relaxed max-w-md">
                  Interested in working together? Fill out the form or send me a direct email. I usually respond within 24 hours.
@@ -51,7 +87,7 @@ export default function Contact() {
                         <div className="p-2 bg-neutral-100 rounded-lg text-neutral-600">
                            <Mail size={20} />
                         </div>
-                        <span className="font-medium text-neutral-900">hello@example.com</span>
+                        <span className="font-medium text-neutral-900">rajakyash23@gmail.com</span>
                      </div>
                      <button 
                        onClick={handleCopyEmail}
@@ -107,48 +143,82 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-white border border-neutral-200 rounded-3xl p-8 shadow-xl shadow-neutral-100"
           >
-            <form className="space-y-6">
+            <AnimatePresence>
+              {isSent && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 text-center"
+                >
+                  Message sent successfully! I&apos;ll get back to you soon.
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <form ref={formRef} className="space-y-6" onSubmit={onSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-neutral-900">Name</label>
                   <input 
                     type="text" 
-                    placeholder="John Doe"
+                    name="name"
+                    placeholder="Yash Rajak"
                     className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 focus:border-neutral-900 focus:ring-0 outline-none transition-colors placeholder:text-neutral-400"
+                    required
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-neutral-900">Email</label>
                   <input 
                     type="email" 
-                    placeholder="john@company.com"
+                    name="email"
+                    placeholder="rajakyash@gmail.com"
                     className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 focus:border-neutral-900 focus:ring-0 outline-none transition-colors placeholder:text-neutral-400"
+                    required
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-neutral-900">Subject</label>
-                <select className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 focus:border-neutral-900 focus:ring-0 outline-none transition-colors text-neutral-600">
-                   <option>General Inquiry</option>
-                   <option>Freelance Project</option>
-                   <option>Job Opportunity</option>
-                   <option>Other</option>
+                <select 
+                  name="subject"
+                  className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 focus:border-neutral-900 focus:ring-0 outline-none transition-colors text-neutral-600"
+                  required
+                >
+                   <option value="">Select a subject</option>
+                   <option value="General Inquiry">General Inquiry</option>
+                   <option value="Freelance Project">Freelance Project</option>
+                   <option value="Job Opportunity">Job Opportunity</option>
+                   <option value="Other">Other</option>
                 </select>
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-neutral-900">Message</label>
                 <textarea 
+                  name="message"
                   rows={4}
                   placeholder="Tell me about your project..."
                   className="w-full px-4 py-3 rounded-xl bg-neutral-50 border border-neutral-200 focus:border-neutral-900 focus:ring-0 outline-none transition-colors placeholder:text-neutral-400 resize-none"
+                  required
                 />
               </div>
 
-              <button className="w-full py-4 rounded-xl bg-neutral-900 text-white font-bold text-lg hover:bg-neutral-800 transition-all flex items-center justify-center gap-2 group">
-                 Send Message 
-                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              <button 
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-4 rounded-xl bg-neutral-900 text-white font-bold text-lg hover:bg-neutral-800 disabled:bg-neutral-400 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 group"
+              >
+                 {isSubmitting ? (
+                   "Sending..."
+                 ) : (
+                   <>
+                     Send Message 
+                     <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                   </>
+                 )}
               </button>
             </form>
           </motion.div>
