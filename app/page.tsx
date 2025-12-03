@@ -201,14 +201,14 @@ export default function Home() {
             title="SaaS"
             category="Website"
             link="https://khancrane.netlify.app/"
-            logo="/phishingguardian2.png"
+            logo="/image.png"
             accentColor="bg-grey-50"
           />
           <SimpleProjectCard
             title="Lifestyle Brand"
             category="Web Design"
             link="https://fabricbymeter.netlify.app/"
-            logo="/fabric-by-meter-logo.jpeg"
+            logo="/image2.png"
             accentColor="bg-white"
           />
         </div>
