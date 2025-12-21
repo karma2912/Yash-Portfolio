@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Briefcase, Trophy, Code2, Cpu, ArrowUpRight, Eye, X } from "lucide-react";
+import { Briefcase, Trophy, Code2, Cpu, ArrowUpRight, Eye, X, Medal } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 
@@ -15,13 +15,16 @@ const staggerContainer = {
 };
 
 export default function About() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCert, setSelectedCert] = useState<string | null>(null);
+
+  const openModal = (certName: string) => setSelectedCert(certName);
+  const closeModal = () => setSelectedCert(null);
+
   return (
     <main className="relative bg-white min-h-screen text-neutral-900 selection:bg-neutral-900 selection:text-white">
       <Navbar />
 
       <div className="fixed inset-0 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size:[16px_16px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
-
       <section className="pt-40 pb-16 px-4 md:px-12 max-w-4xl mx-auto text-center">
         <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 border border-neutral-200 mb-8">
@@ -136,28 +139,78 @@ export default function About() {
              className="relative p-8 rounded-2xl bg-amber-50 border border-amber-100 overflow-hidden group hover:border-amber-200 transition-all"
            >
               <div className="absolute top-0 right-0 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-amber-300/30" />
-              
               <div className="relative z-10">
                 <div className="flex justify-between items-start">
                     <div className="w-12 h-12 rounded-full bg-white text-amber-500 shadow-sm flex items-center justify-center mb-6">
                         <Trophy size={24} fill="currentColor" className="opacity-100" />
                     </div>
                     <button 
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={() => openModal("Jai Hind")}
                         className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-amber-200 text-xs font-bold text-amber-800 hover:bg-white transition-colors"
                     >
                         <Eye size={14} /> View Certificate
                     </button>
                 </div>
-
                 <h3 className="text-2xl font-bold text-neutral-900 mb-2">1st Place Winner</h3>
-                <p className="font-medium text-amber-800 mb-1">Coding Competition @ Elphinstone College</p>
+                <p className="font-medium text-amber-800 mb-1">Hackathon @ Jai Hind College</p>
                 <p className="text-sm text-amber-700/80 mt-4 leading-relaxed">
-                  Competed against top students to solve complex algorithmic problems under time constraints. Demonstrated speed, logic, and efficient code optimization.
+                  Secured the top spot by building an innovative solution under tight deadlines. Recognized for best UI/UX and efficient backend architecture.
                 </p>
               </div>
            </motion.div>
-
+           <motion.div 
+             initial={{ opacity: 0, scale: 0.95 }}
+             whileInView={{ opacity: 1, scale: 1 }}
+             viewport={{ once: true }}
+             transition={{ delay: 0.1 }}
+             className="relative p-8 rounded-2xl bg-slate-50 border border-slate-200 overflow-hidden group hover:border-slate-300 transition-all"
+           >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-slate-200/40 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-slate-300/50" />
+              <div className="relative z-10">
+                <div className="flex justify-between items-start">
+                    <div className="w-12 h-12 rounded-full bg-white text-slate-600 shadow-sm flex items-center justify-center mb-6">
+                        <Medal size={24} fill="currentColor" className="opacity-100" />
+                    </div>
+                    <button 
+                        onClick={() => openModal("KC College")}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-slate-200 text-xs font-bold text-slate-700 hover:bg-white transition-colors"
+                    >
+                        <Eye size={14} /> View Certificate
+                    </button>
+                </div>
+                <h3 className="text-2xl font-bold text-neutral-900 mb-2">2nd Place Winner</h3>
+                <p className="font-medium text-slate-700 mb-1">Hackathon @ KC College</p>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                   Awarded Silver for developing a highly scalable MVP. Praised by judges for code quality and problem-solving approach.
+                </p>
+              </div>
+           </motion.div>
+           <motion.div 
+             initial={{ opacity: 0, scale: 0.95 }}
+             whileInView={{ opacity: 1, scale: 1 }}
+             viewport={{ once: true }}
+             className="relative p-8 rounded-2xl bg-amber-50 border border-amber-100 overflow-hidden group hover:border-amber-200 transition-all"
+           >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-amber-300/30" />
+              <div className="relative z-10">
+                <div className="flex justify-between items-start">
+                    <div className="w-12 h-12 rounded-full bg-white text-amber-500 shadow-sm flex items-center justify-center mb-6">
+                        <Trophy size={24} fill="currentColor" className="opacity-100" />
+                    </div>
+                    <button 
+                        onClick={() => openModal("Elphinstone")}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-amber-200 text-xs font-bold text-amber-800 hover:bg-white transition-colors"
+                    >
+                        <Eye size={14} /> View Certificate
+                    </button>
+                </div>
+                <h3 className="text-2xl font-bold text-neutral-900 mb-2">1st Place Winner</h3>
+                <p className="font-medium text-amber-800 mb-1">Coding Competition @ Elphinstone College</p>
+                <p className="text-sm text-amber-700/80 mt-4 leading-relaxed">
+                  Competed against top students to solve complex algorithmic problems under time constraints. Demonstrated speed and logic.
+                </p>
+              </div>
+           </motion.div>
            <motion.div 
              initial={{ opacity: 0, scale: 0.95 }}
              whileInView={{ opacity: 1, scale: 1 }}
@@ -171,7 +224,7 @@ export default function About() {
               <h3 className="text-2xl font-bold text-neutral-900 mb-2">Hackathon Enthusiast</h3>
               <p className="font-medium text-neutral-500 mb-1">Active Participant</p>
               <p className="text-sm text-neutral-500 mt-4 leading-relaxed">
-                Regularly participate in 24-48 hour hackathons to push technical boundaries. I love the chaos of building MVP solutions overnight and collaborating with random teammates.
+                Regularly participate in 24-48 hour hackathons to push technical boundaries. I love the chaos of building MVP solutions overnight.
               </p>
            </motion.div>
         </div>
@@ -179,19 +232,18 @@ export default function About() {
 
       <section className="py-24 text-center">
          <p className="text-neutral-500 text-sm mb-4">Want to see the code behind these?</p>
-         <a href="https://github.com" className="inline-flex items-center gap-2 text-neutral-900 font-bold border-b-2 border-neutral-900 hover:text-neutral-600 hover:border-neutral-600 transition-colors">
+         <a href="https://github.com/karma2912" target="_blank" className="inline-flex items-center gap-2 text-neutral-900 font-bold border-b-2 border-neutral-900 hover:text-neutral-600 hover:border-neutral-600 transition-colors">
              Check out my GitHub <ArrowUpRight size={16} />
          </a>
       </section>
-
       <AnimatePresence>
-        {isModalOpen && (
+        {selectedCert && (
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-neutral-900/60 backdrop-blur-sm"
-            onClick={() => setIsModalOpen(false)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-900/60 backdrop-blur-sm"
+            onClick={closeModal}
           >
             <motion.div 
               initial={{ scale: 0.9, opacity: 0 }}
@@ -201,23 +253,28 @@ export default function About() {
               className="relative max-w-3xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden p-2"
             >
                 <button 
-                    onClick={() => setIsModalOpen(false)}
+                    onClick={closeModal}
                     className="absolute top-4 right-4 z-10 p-2 bg-neutral-900 text-white rounded-full hover:scale-110 transition-transform"
                 >
                     <X size={20} />
                 </button>
 
-                <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-neutral-100">
+                <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-neutral-100 flex items-center justify-center">
+                    <div className="text-center p-10">
+                        <Trophy size={48} className="mx-auto text-neutral-300 mb-4" />
+                        <p className="text-neutral-400">Image for {selectedCert} Certificate</p>
+                    </div>
+                    
                     <Image 
-                        src="/your-certificate-image.jpg" 
-                        alt="Certificate of Achievement"
+                        src={`/certificates/${selectedCert.toLowerCase().replace(" ", "-")}.jpg`} 
+                        alt={`${selectedCert} Certificate`}
                         fill
                         className="object-contain" 
-                    />
+                    /> 
                 </div>
                 
                 <div className="p-4 text-center">
-                    <p className="text-sm font-medium text-neutral-500">Verified Certificate of Achievement</p>
+                    <p className="text-sm font-medium text-neutral-500">Verified Certificate of Achievement - {selectedCert}</p>
                 </div>
             </motion.div>
           </motion.div>
@@ -226,4 +283,3 @@ export default function About() {
     </main>
   );
 }
-
