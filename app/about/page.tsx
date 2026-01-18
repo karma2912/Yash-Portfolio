@@ -162,6 +162,32 @@ export default function About() {
              initial={{ opacity: 0, scale: 0.95 }}
              whileInView={{ opacity: 1, scale: 1 }}
              viewport={{ once: true }}
+             className="relative p-8 rounded-2xl bg-amber-50 border border-amber-100 overflow-hidden group hover:border-amber-200 transition-all"
+           >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-amber-300/30" />
+              <div className="relative z-10">
+                <div className="flex justify-between items-start">
+                    <div className="w-12 h-12 rounded-full bg-white text-amber-500 shadow-sm flex items-center justify-center mb-6">
+                        <Trophy size={24} fill="currentColor" className="opacity-100" />
+                    </div>
+                    <button 
+                        onClick={() => openModal("Kirti College")}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-amber-200 text-xs font-bold text-amber-800 hover:bg-white transition-colors"
+                    >
+                        <Eye size={14} /> View Certificate
+                    </button>
+                </div>
+                <h3 className="text-2xl font-bold text-neutral-900 mb-2">1st Place Winner</h3>
+                <p className="font-medium text-amber-800 mb-1">Hackathon @ Kirti College</p>
+                <p className="text-sm text-amber-700/80 mt-4 leading-relaxed">
+                 Dominated the competition with a creative full-stack solution. Judges praised the real-time features and clean code architecture.
+                </p>
+              </div>
+           </motion.div>
+           <motion.div 
+             initial={{ opacity: 0, scale: 0.95 }}
+             whileInView={{ opacity: 1, scale: 1 }}
+             viewport={{ once: true }}
              transition={{ delay: 0.1 }}
              className="relative p-8 rounded-2xl bg-slate-50 border border-slate-200 overflow-hidden group hover:border-slate-300 transition-all"
            >
