@@ -188,33 +188,6 @@ export default function About() {
              initial={{ opacity: 0, scale: 0.95 }}
              whileInView={{ opacity: 1, scale: 1 }}
              viewport={{ once: true }}
-             transition={{ delay: 0.1 }}
-             className="relative p-8 rounded-2xl bg-slate-50 border border-slate-200 overflow-hidden group hover:border-slate-300 transition-all"
-           >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-slate-200/40 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-slate-300/50" />
-              <div className="relative z-10">
-                <div className="flex justify-between items-start">
-                    <div className="w-12 h-12 rounded-full bg-white text-slate-600 shadow-sm flex items-center justify-center mb-6">
-                        <Medal size={24} fill="currentColor" className="opacity-100" />
-                    </div>
-                    <button 
-                        onClick={() => openModal("KC College")}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-slate-200 text-xs font-bold text-slate-700 hover:bg-white transition-colors"
-                    >
-                        <Eye size={14} /> View Certificate
-                    </button>
-                </div>
-                <h3 className="text-2xl font-bold text-neutral-900 mb-2">2nd Place Winner</h3>
-                <p className="font-medium text-slate-700 mb-1">Hackathon @ KC College</p>
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                   Awarded Silver for developing a highly scalable MVP. Praised by judges for code quality and problem-solving approach.
-                </p>
-              </div>
-           </motion.div>
-           <motion.div 
-             initial={{ opacity: 0, scale: 0.95 }}
-             whileInView={{ opacity: 1, scale: 1 }}
-             viewport={{ once: true }}
              className="relative p-8 rounded-2xl bg-amber-50 border border-amber-100 overflow-hidden group hover:border-amber-200 transition-all"
            >
               <div className="absolute top-0 right-0 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-amber-300/30" />
@@ -237,21 +210,32 @@ export default function About() {
                 </p>
               </div>
            </motion.div>
-           <motion.div 
+             <motion.div 
              initial={{ opacity: 0, scale: 0.95 }}
              whileInView={{ opacity: 1, scale: 1 }}
              viewport={{ once: true }}
              transition={{ delay: 0.1 }}
-             className="p-8 rounded-2xl bg-white border border-neutral-200 group hover:border-neutral-300 transition-all"
+             className="relative p-8 rounded-2xl bg-slate-50 border border-slate-200 overflow-hidden group hover:border-slate-300 transition-all"
            >
-              <div className="w-12 h-12 rounded-full bg-neutral-100 text-neutral-900 flex items-center justify-center mb-6 group-hover:bg-neutral-900 group-hover:text-white transition-colors">
-                  <Code2 size={24} />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-slate-200/40 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-slate-300/50" />
+              <div className="relative z-10">
+                <div className="flex justify-between items-start">
+                    <div className="w-12 h-12 rounded-full bg-white text-slate-600 shadow-sm flex items-center justify-center mb-6">
+                        <Medal size={24} fill="currentColor" className="opacity-100" />
+                    </div>
+                    <button 
+                        onClick={() => openModal("KC College")}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-slate-200 text-xs font-bold text-slate-700 hover:bg-white transition-colors"
+                    >
+                        <Eye size={14} /> View Certificate
+                    </button>
+                </div>
+                <h3 className="text-2xl font-bold text-neutral-900 mb-2">2nd Place Winner</h3>
+                <p className="font-medium text-slate-700 mb-1">Hackathon @ KC College</p>
+                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+                   Awarded Silver for developing a highly scalable MVP. Praised by judges for code quality and problem-solving approach.
+                </p>
               </div>
-              <h3 className="text-2xl font-bold text-neutral-900 mb-2">Hackathon Enthusiast</h3>
-              <p className="font-medium text-neutral-500 mb-1">Active Participant</p>
-              <p className="text-sm text-neutral-500 mt-4 leading-relaxed">
-                Regularly participate in 24-48 hour hackathons to push technical boundaries. I love the chaos of building MVP solutions overnight.
-              </p>
            </motion.div>
         </div>
       </section>
