@@ -14,6 +14,55 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.2 } }
 };
 
+// Extracted achievements into an array for cleaner code and easier updates
+const achievements = [
+  {
+    id: "hsnc",
+    place: "1st Place Winner",
+    event: "Task on the Circle @ HSNC University",
+    desc: "Emerged victorious in the 'Task on the Circle' coding competition. Showcased strong algorithmic problem-solving, logical thinking, and rapid development skills under strict time constraints.",
+    certName: "HSNC University",
+    color: "amber",
+    featured: true // Makes this span full width
+  },
+  {
+    id: "jaihind",
+    place: "1st Place Winner",
+    event: "Hackathon @ Jai Hind College",
+    desc: "Secured the top spot by building an innovative solution under tight deadlines. Recognized for best UI/UX and efficient backend architecture.",
+    certName: "Jai Hind",
+    color: "amber",
+    featured: false
+  },
+  {
+    id: "kirti",
+    place: "1st Place Winner",
+    event: "Hackathon @ Kirti College",
+    desc: "Dominated the competition with a creative full-stack solution. Judges praised the real-time features and clean code architecture.",
+    certName: "Kirti College",
+    color: "amber",
+    featured: false
+  },
+  {
+    id: "elphinstone",
+    place: "1st Place Winner",
+    event: "Coding Competition @ Elphinstone College",
+    desc: "Competed against top students to solve complex algorithmic problems under time constraints. Demonstrated speed and logic.",
+    certName: "Elphinstone",
+    color: "amber",
+    featured: false
+  },
+  {
+    id: "kc",
+    place: "2nd Place Winner",
+    event: "Hackathon @ KC College",
+    desc: "Awarded Silver for developing a highly scalable MVP. Praised by judges for code quality and problem-solving approach.",
+    certName: "KC College",
+    color: "slate",
+    featured: false
+  }
+];
+
 export default function About() {
   const [selectedCert, setSelectedCert] = useState<string | null>(null);
 
@@ -25,6 +74,7 @@ export default function About() {
       <Navbar />
 
       <div className="fixed inset-0 h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size:[16px_16px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+      
       <section className="pt-40 pb-16 px-4 md:px-12 max-w-4xl mx-auto text-center">
         <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 border border-neutral-200 mb-8">
@@ -55,6 +105,7 @@ export default function About() {
           variants={staggerContainer}
           className="relative border-l border-neutral-200 ml-3 md:ml-6 space-y-12"
         >
+          {/* Experience Timelines */}
           <motion.div variants={fadeInUp} className="relative pl-8 md:pl-12">
             <div className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-neutral-900 ring-4 ring-white" />
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
@@ -125,127 +176,85 @@ export default function About() {
         </motion.div>
       </section>
 
+      {/* Redesigned Honors & Achievements Section */}
       <section className="py-16 px-4 md:px-12 max-w-5xl mx-auto">
         <div className="flex items-center gap-4 mb-12">
             <h2 className="text-2xl font-bold tracking-tight text-neutral-900">Honors & Hackathons</h2>
             <div className="h-px bg-neutral-200 flex-1" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-           <motion.div 
-             initial={{ opacity: 0, scale: 0.95 }}
-             whileInView={{ opacity: 1, scale: 1 }}
-             viewport={{ once: true }}
-             className="relative p-8 rounded-2xl bg-amber-50 border border-amber-100 overflow-hidden group hover:border-amber-200 transition-all"
-           >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-amber-300/30" />
-              <div className="relative z-10">
-                <div className="flex justify-between items-start">
-                    <div className="w-12 h-12 rounded-full bg-white text-amber-500 shadow-sm flex items-center justify-center mb-6">
-                        <Trophy size={24} fill="currentColor" className="opacity-100" />
-                    </div>
-                    <button 
-                        onClick={() => openModal("Jai Hind")}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-amber-200 text-xs font-bold text-amber-800 hover:bg-white transition-colors"
-                    >
-                        <Eye size={14} /> View Certificate
-                    </button>
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {achievements.map((ach) => (
+            <motion.div
+              key={ach.id}
+              variants={fadeInUp}
+              whileHover={{ y: -5 }}
+              className={`relative p-6 md:p-8 rounded-2xl border bg-white shadow-sm overflow-hidden group transition-all duration-300 hover:shadow-md ${
+                ach.color === 'amber' 
+                  ? 'border-amber-100 hover:border-amber-300' 
+                  : 'border-slate-200 hover:border-slate-300'
+              } ${ach.featured ? 'md:col-span-2' : ''}`}
+            >
+              {/* Background Glow */}
+              <div className={`absolute top-0 right-0 w-40 h-40 rounded-full blur-3xl -mr-16 -mt-16 transition-all duration-500 ${
+                ach.color === 'amber' 
+                  ? 'bg-amber-100 group-hover:bg-amber-200/60' 
+                  : 'bg-slate-100 group-hover:bg-slate-200/60'
+              }`} />
+
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="flex justify-between items-start mb-6">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-sm ${
+                    ach.color === 'amber' 
+                      ? 'bg-linear-to-br from-amber-100 to-amber-50 text-amber-600 border border-amber-200' 
+                      : 'bg-linear-to-br from-slate-100 to-slate-50 text-slate-600 border border-slate-200'
+                  }`}>
+                    {ach.color === 'amber' ? <Trophy size={22} fill="currentColor" /> : <Medal size={22} fill="currentColor" />}
+                  </div>
+                  
+                  <button 
+                    onClick={() => openModal(ach.certName)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-colors border ${
+                      ach.color === 'amber' 
+                        ? 'bg-white border-amber-200 text-amber-700 hover:bg-amber-50' 
+                        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                    }`}
+                  >
+                    <Eye size={14} /> View Certificate
+                  </button>
                 </div>
-                <h3 className="text-2xl font-bold text-neutral-900 mb-2">1st Place Winner</h3>
-                <p className="font-medium text-amber-800 mb-1">Hackathon @ Jai Hind College</p>
-                <p className="text-sm text-amber-700/80 mt-4 leading-relaxed">
-                  Secured the top spot by building an innovative solution under tight deadlines. Recognized for best UI/UX and efficient backend architecture.
-                </p>
-              </div>
-           </motion.div>
-           <motion.div 
-             initial={{ opacity: 0, scale: 0.95 }}
-             whileInView={{ opacity: 1, scale: 1 }}
-             viewport={{ once: true }}
-             className="relative p-8 rounded-2xl bg-amber-50 border border-amber-100 overflow-hidden group hover:border-amber-200 transition-all"
-           >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-amber-300/30" />
-              <div className="relative z-10">
-                <div className="flex justify-between items-start">
-                    <div className="w-12 h-12 rounded-full bg-white text-amber-500 shadow-sm flex items-center justify-center mb-6">
-                        <Trophy size={24} fill="currentColor" className="opacity-100" />
-                    </div>
-                    <button 
-                        onClick={() => openModal("Kirti College")}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-amber-200 text-xs font-bold text-amber-800 hover:bg-white transition-colors"
-                    >
-                        <Eye size={14} /> View Certificate
-                    </button>
+
+                <div className={`mt-auto ${ach.featured ? 'md:w-3/4' : ''}`}>
+                  <h3 className="text-xl md:text-2xl font-bold text-neutral-900 mb-1">{ach.place}</h3>
+                  <p className={`font-semibold text-sm mb-3 ${
+                    ach.color === 'amber' ? 'text-amber-600' : 'text-slate-600'
+                  }`}>
+                    {ach.event}
+                  </p>
+                  <p className="text-sm text-neutral-500 leading-relaxed">
+                    {ach.desc}
+                  </p>
                 </div>
-                <h3 className="text-2xl font-bold text-neutral-900 mb-2">1st Place Winner</h3>
-                <p className="font-medium text-amber-800 mb-1">Hackathon @ Kirti College</p>
-                <p className="text-sm text-amber-700/80 mt-4 leading-relaxed">
-                 Dominated the competition with a creative full-stack solution. Judges praised the real-time features and clean code architecture.
-                </p>
               </div>
-           </motion.div>
-           <motion.div 
-             initial={{ opacity: 0, scale: 0.95 }}
-             whileInView={{ opacity: 1, scale: 1 }}
-             viewport={{ once: true }}
-             className="relative p-8 rounded-2xl bg-amber-50 border border-amber-100 overflow-hidden group hover:border-amber-200 transition-all"
-           >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-200/20 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-amber-300/30" />
-              <div className="relative z-10">
-                <div className="flex justify-between items-start">
-                    <div className="w-12 h-12 rounded-full bg-white text-amber-500 shadow-sm flex items-center justify-center mb-6">
-                        <Trophy size={24} fill="currentColor" className="opacity-100" />
-                    </div>
-                    <button 
-                        onClick={() => openModal("Elphinstone")}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-amber-200 text-xs font-bold text-amber-800 hover:bg-white transition-colors"
-                    >
-                        <Eye size={14} /> View Certificate
-                    </button>
-                </div>
-                <h3 className="text-2xl font-bold text-neutral-900 mb-2">1st Place Winner</h3>
-                <p className="font-medium text-amber-800 mb-1">Coding Competition @ Elphinstone College</p>
-                <p className="text-sm text-amber-700/80 mt-4 leading-relaxed">
-                  Competed against top students to solve complex algorithmic problems under time constraints. Demonstrated speed and logic.
-                </p>
-              </div>
-           </motion.div>
-             <motion.div 
-             initial={{ opacity: 0, scale: 0.95 }}
-             whileInView={{ opacity: 1, scale: 1 }}
-             viewport={{ once: true }}
-             transition={{ delay: 0.1 }}
-             className="relative p-8 rounded-2xl bg-slate-50 border border-slate-200 overflow-hidden group hover:border-slate-300 transition-all"
-           >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-slate-200/40 rounded-full blur-2xl -mr-10 -mt-10 transition-all group-hover:bg-slate-300/50" />
-              <div className="relative z-10">
-                <div className="flex justify-between items-start">
-                    <div className="w-12 h-12 rounded-full bg-white text-slate-600 shadow-sm flex items-center justify-center mb-6">
-                        <Medal size={24} fill="currentColor" className="opacity-100" />
-                    </div>
-                    <button 
-                        onClick={() => openModal("KC College")}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/50 border border-slate-200 text-xs font-bold text-slate-700 hover:bg-white transition-colors"
-                    >
-                        <Eye size={14} /> View Certificate
-                    </button>
-                </div>
-                <h3 className="text-2xl font-bold text-neutral-900 mb-2">2nd Place Winner</h3>
-                <p className="font-medium text-slate-700 mb-1">Hackathon @ KC College</p>
-                <p className="text-sm text-slate-600 mt-4 leading-relaxed">
-                   Awarded Silver for developing a highly scalable MVP. Praised by judges for code quality and problem-solving approach.
-                </p>
-              </div>
-           </motion.div>
-        </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </section>
 
       <section className="py-24 text-center">
          <p className="text-neutral-500 text-sm mb-4">Want to see the code behind these?</p>
-         <a href="https://github.com/karma2912" target="_blank" className="inline-flex items-center gap-2 text-neutral-900 font-bold border-b-2 border-neutral-900 hover:text-neutral-600 hover:border-neutral-600 transition-colors">
+         <a href="https://github.com/karma2912" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-neutral-900 font-bold border-b-2 border-neutral-900 hover:text-neutral-600 hover:border-neutral-600 transition-colors">
              Check out my GitHub <ArrowUpRight size={16} />
          </a>
       </section>
+
+      {/* Certificate Modal */}
       <AnimatePresence>
         {selectedCert && (
           <motion.div 
@@ -256,9 +265,9 @@ export default function About() {
             onClick={closeModal}
           >
             <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
               className="relative max-w-3xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden p-2"
             >
@@ -269,14 +278,14 @@ export default function About() {
                     <X size={20} />
                 </button>
 
-                <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-neutral-100 flex items-center justify-center">
+                <div className="relative aspect-4/3 w-full rounded-xl overflow-hidden bg-neutral-100 flex items-center justify-center border border-neutral-200">
                     <div className="text-center p-10">
                         <Trophy size={48} className="mx-auto text-neutral-300 mb-4" />
                         <p className="text-neutral-400">Image for {selectedCert} Certificate</p>
                     </div>
                     
                     <Image 
-                        src={`/certificates/${selectedCert.toLowerCase().replace(" ", "-")}.jpg`} 
+                        src={`/certificates/${selectedCert.toLowerCase().replace(/ /g, "-")}.jpg`} 
                         alt={`${selectedCert} Certificate`}
                         fill
                         className="object-contain" 
