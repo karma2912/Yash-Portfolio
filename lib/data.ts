@@ -199,7 +199,7 @@ export const experience: ExperienceItem[] = [
 export const proofStats = [
   { count: 1000, suffix: "+", decimal: false, label: "Active users across shipped products" },
   { count: 3, suffix: "", decimal: false, label: "Official copyrights" },
-  { count: 4, suffix: "+", decimal: false, label: "1st place finishes / victories" },
+  { count: 4, suffix: "+", decimal: false, label: "1st place Hackathon victories" },
   { count: 9.31, suffix: "", decimal: true, label: "CGPA" },
 ];
 
