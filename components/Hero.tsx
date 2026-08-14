@@ -1,76 +1,63 @@
-'use client';
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+"use client";
+import { useEffect, useState } from "react";
+import TechnicalBackground from "./TechnicalBackground";
 
-export default function Hero() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+export default function Hero({ ready }: { ready: boolean }) {
+  const [inState, setInState] = useState(false);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+    if (ready) {
+      const t = setTimeout(() => setInState(true), 60);
+      return () => clearTimeout(t);
+    }
+  }, [ready]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden flex flex-col justify-center px-6 md:px-12 border-b border-border">
-      {/* Interactive Abstract Grid */}
-      <div 
-        className="absolute inset-0 opacity-20 pointer-events-none"
-        style={{
-          backgroundImage: `radial-gradient(circle at ${mousePos.x}px ${mousePos.y}px, rgba(255,51,0,0.15), transparent 25%), linear-gradient(to right, #27272A 1px, transparent 1px), linear-gradient(to bottom, #27272A 1px, transparent 1px)`,
-          backgroundSize: '100% 100%, 40px 40px, 40px 40px',
-        }}
-      />
-
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
-        <div className="md:col-span-8 flex flex-col">
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="font-mono text-accent text-sm mb-8 tracking-widest uppercase"
-          >
-            01 / Software Engineer
-          </motion.p>
-          
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-[12vw] md:text-[8rem] font-bold leading-[0.85] tracking-tighter"
-          >
-            YASH
-          </motion.h1>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-[12vw] md:text-[8rem] font-bold leading-[0.85] tracking-tighter text-muted"
-          >
-            BUILDS
-          </motion.h1>
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-[12vw] md:text-[8rem] font-bold leading-[0.85] tracking-tighter"
-          >
-            SYSTEMS.
-          </motion.h1>
+    <section id="hero">
+      <TechnicalBackground />
+      <div className="wrap hero-inner">
+        <div className="hero-top">
+          <span className="eyebrow">01 / Full-Stack Software Engineer</span>
+          <span className="hero-loc mono">
+            Mumbai
+            <br />
+            India
+          </span>
         </div>
-
-        <motion.div 
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1 }}
-          className="md:col-span-4 flex flex-col gap-8 pb-4"
-        >
-          <div>
-            <p className="font-mono text-xs text-muted mb-2 uppercase">Location</p>
-            <p className="text-sm">Mumbai, India</p>
+        <h1 className={`hero-headline ${inState ? "in" : ""}`}>
+          <span className="row">
+            <span>YASH</span>
+          </span>
+          <span className="row">
+            <span>BUILDS</span>
+          </span>
+          <span className="row">
+            <span>SYSTEMS.</span>
+          </span>
+        </h1>
+        <div className="hero-bottom">
+          <p className="hero-desc">
+            I build scalable web products, intelligent systems, and
+            interfaces that turn complex problems into usable software —
+            across the frontend, the backend, and the infrastructure between
+            them.
+          </p>
+          <div className="hero-facts">
+            <div>
+              <b>Full-Stack Engineer</b>Products / Systems / AI
+            </div>
+            <div>
+              <b>1,000+ users</b>In production
+            </div>
+            <div>
+              <b>4+ wins</b>Hackathons
+            </div>
           </div>
-          <div>
-            <p className="font-mono text-xs text-muted mb-2 uppercase">Focus</p>
-            <p className="text-sm">Scalable Web Apps / AI Systems / Real-time</p>
-          </div>
-          <div className="pt-4 border-t border-border">
-            <p className="text-sm text-muted max-w-[280px] leading-relaxed">
-              I build scalable web products, intelligent systems, and interfaces that turn complex constraints into usable software.
-            </p>
-          </div>
-        </motion.div>
+        </div>
+      </div>
+      <div className="scroll-cue">
+        <span className="line" />
+        SCROLL
       </div>
     </section>
   );

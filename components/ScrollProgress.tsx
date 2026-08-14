@@ -1,20 +1,20 @@
-// components/ScrollProgress.tsx
-'use client'
-
-import { motion, useScroll, useSpring } from 'framer-motion'
+"use client";
+import { useEffect, useState } from "react";
 
 export default function ScrollProgress() {
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  })
+  const [width, setWidth] = useState(0);
 
-  return (
-    <motion.div
-      style={{ scaleX }}
-      className="fixed top-0 left-0 right-0 h-[2px] bg-[#FF4D00] origin-left z-[100]"
-    />
-  )
+  useEffect(() => {
+    function onScroll() {
+      const h = document.documentElement;
+      const scrolled = h.scrollTop;
+      const max = h.scrollHeight - h.clientHeight;
+      setWidth(max > 0 ? (scrolled / max) * 100 : 0);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return <div id="scroll-progress" style={{ width: `${width}%` }} />;
 }
